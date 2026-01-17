@@ -5,10 +5,10 @@ import { generateMockData, getMockAnalysis } from '../utils/mockData'
 import AnalysisView from './analysis/AnalysisView'
 import CategoriesView from './categories/CategoriesView'
 import CategoryCropsView from './categories/CategoryCropsView'
+import SearchView from './categories/SearchView'
 import Footer from './common/Footer'
 import Header from './common/Header'
 import HomeView from './home/HomeView'
-import SearchView from './search/SearchView'
 import TechnicalMapCategoriesView from './technicalmap/TechnicalMapCategoriesView'
 import TechnicalMapCropsView from './technicalmap/TechnicalMapCropsView'
 import TechnicalMapView from './technicalmap/TechnicalMapView'
@@ -62,8 +62,8 @@ const CropAdvisorApp = () => {
 			language === 'uz'
 				? crop.name
 				: language === 'ru'
-				? crop.nameRu
-				: crop.nameEn
+					? crop.nameRu
+					: crop.nameEn
 		setSearchQuery(cropName)
 		analyzeCrop(cropName)
 	}
