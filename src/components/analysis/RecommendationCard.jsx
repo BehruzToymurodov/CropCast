@@ -23,37 +23,35 @@ const RecommendationCard = ({ analysis, t }) => {
 	const getRecommendationIcon = rec => {
 		switch (rec) {
 			case 'PLANT':
-				return <CheckCircle className='w-8 h-8' />
+				return <CheckCircle className='w-6 h-6 md:w-8 md:h-8' />
 			case 'AVOID':
-				return <AlertTriangle className='w-8 h-8' />
+				return <AlertTriangle className='w-6 h-6 md:w-8 md:h-8' />
 			case 'CAUTIOUS':
-				return <TrendingDown className='w-8 h-8' />
+				return <TrendingDown className='w-6 h-6 md:w-8 md:h-8' />
 			default:
-				return <BarChart3 className='w-8 h-8' />
+				return <BarChart3 className='w-6 h-6 md:w-8 md:h-8' />
 		}
 	}
 
 	return (
 		<div
-			className={`rounded-xl shadow-lg p-8 border-2 ${getRecommendationColor(
-				analysis.recommendation
-			)}`}
+			className={`rounded-xl shadow-lg p-6 md:p-8 border-2 ${getRecommendationColor(analysis.recommendation)}`}
 		>
-			<div className='flex items-start gap-6'>
+			<div className='flex flex-col sm:flex-row items-start gap-4 md:gap-6'>
 				<div className='flex-shrink-0'>
 					{getRecommendationIcon(analysis.recommendation)}
 				</div>
-				<div className='flex-1'>
-					<div className='flex items-center justify-between mb-2'>
-						<h3 className='text-2xl font-bold'>
+				<div className='flex-1 w-full'>
+					<div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2'>
+						<h3 className='text-xl md:text-2xl font-bold'>
 							{analysis.cropName.toUpperCase()} - {t[analysis.recommendation]}
 						</h3>
 						<span className='text-sm font-semibold'>
 							{t.confidence}: {analysis.confidence}%
 						</span>
 					</div>
-					<p className='text-lg mb-4'>{analysis.marketOutlook}</p>
-					<div className='grid grid-cols-3 gap-4 mt-4'>
+					<p className='text-base md:text-lg mb-4'>{analysis.marketOutlook}</p>
+					<div className='grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mt-4'>
 						<div className='bg-white bg-opacity-60 rounded-lg p-3'>
 							<div className='text-sm font-semibold mb-1'>
 								{t.priceProjection}
@@ -64,16 +62,20 @@ const RecommendationCard = ({ analysis, t }) => {
 								) : (
 									<TrendingDown className='w-5 h-5' />
 								)}
-								<span className='font-bold'>{t[analysis.priceProjection]}</span>
+								<span className='font-bold text-sm md:text-base'>
+									{t[analysis.priceProjection]}
+								</span>
 							</div>
 						</div>
 						<div className='bg-white bg-opacity-60 rounded-lg p-3'>
 							<div className='text-sm font-semibold mb-1'>{t.riskLevel}</div>
-							<span className='font-bold'>{t[analysis.riskLevel]}</span>
+							<span className='font-bold text-sm md:text-base'>
+								{t[analysis.riskLevel]}
+							</span>
 						</div>
 						<div className='bg-white bg-opacity-60 rounded-lg p-3'>
 							<div className='text-sm font-semibold mb-1'>{t.marketStatus}</div>
-							<span className='font-bold'>{t.season}</span>
+							<span className='font-bold text-sm md:text-base'>{t.season}</span>
 						</div>
 					</div>
 				</div>

@@ -21,22 +21,22 @@ const HistoricalCharts = ({ data, t, currency }) => {
 	const currencySymbol = getCurrencySymbol(currency)
 
 	return (
-		<div className='bg-white rounded-xl shadow-lg p-8'>
-			<h3 className='text-xl font-bold text-gray-800 mb-6'>
+		<div className='bg-white rounded-xl shadow-lg p-6 md:p-8'>
+			<h3 className='text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-6'>
 				{t.historicalTrends}
 			</h3>
 
 			<div className='mb-8'>
-				<h4 className='text-lg font-semibold text-gray-700 mb-4'>
+				<h4 className='text-base md:text-lg font-semibold text-gray-700 mb-4'>
 					{t.priceTrends}
 				</h4>
-				<ResponsiveContainer width='100%' height={300}>
+				<ResponsiveContainer width='100%' height={250}>
 					<LineChart data={convertedData}>
 						<CartesianGrid strokeDasharray='3 3' />
-						<XAxis dataKey='year' />
-						<YAxis />
+						<XAxis dataKey='year' tick={{ fontSize: 12 }} />
+						<YAxis tick={{ fontSize: 12 }} />
 						<Tooltip formatter={value => `${currencySymbol} ${value}`} />
-						<Legend />
+						<Legend wrapperStyle={{ fontSize: '14px' }} />
 						<Line
 							type='monotone'
 							dataKey='price'
@@ -49,37 +49,27 @@ const HistoricalCharts = ({ data, t, currency }) => {
 			</div>
 
 			<div className='mb-8'>
-				<h4 className='text-lg font-semibold text-gray-700 mb-4'>
+				<h4 className='text-base md:text-lg font-semibold text-gray-700 mb-4'>
 					{t.productionVsWaste}
 				</h4>
-				<ResponsiveContainer width='100%' height={400}>
+				<ResponsiveContainer width='100%' height={300}>
 					<ComposedChart data={data} barGap={8}>
 						<CartesianGrid strokeDasharray='3 3' />
-						<XAxis dataKey='year' />
+						<XAxis dataKey='year' tick={{ fontSize: 12 }} />
 						<YAxis
 							yAxisId='left'
 							orientation='left'
 							stroke='#16a34a'
-							label={{
-								value: t.production,
-								angle: -90,
-								position: 'insideLeft',
-								style: { textAnchor: 'middle' },
-							}}
+							tick={{ fontSize: 12 }}
 						/>
 						<YAxis
 							yAxisId='right'
 							orientation='right'
 							stroke='#dc2626'
-							label={{
-								value: t.waste,
-								angle: 90,
-								position: 'insideRight',
-								style: { textAnchor: 'middle' },
-							}}
+							tick={{ fontSize: 12 }}
 						/>
 						<Tooltip />
-						<Legend />
+						<Legend wrapperStyle={{ fontSize: '14px' }} />
 						<Bar
 							yAxisId='left'
 							dataKey='production'
