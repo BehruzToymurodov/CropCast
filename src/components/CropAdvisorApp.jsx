@@ -5,10 +5,13 @@ import { generateMockData, getMockAnalysis } from '../utils/mockData'
 import AnalysisView from './analysis/AnalysisView'
 import CategoriesView from './categories/CategoriesView'
 import CategoryCropsView from './categories/CategoryCropsView'
-import SearchView from './categories/SearchView'
 import Footer from './common/Footer'
 import Header from './common/Header'
-import HomeView from './home/homeView'
+import HomeView from './home/HomeView'
+import SearchView from './search/SearchView'
+import TechnicalMapCategoriesView from './technicalmap/TechnicalMapCategoriesView'
+import TechnicalMapCropsView from './technicalmap/TechnicalMapCropsView'
+import TechnicalMapView from './technicalmap/TechnicalMapView'
 
 const CropAdvisorApp = () => {
 	const [language, setLanguage] = useState('uz')
@@ -19,6 +22,7 @@ const CropAdvisorApp = () => {
 	const [analysis, setAnalysis] = useState(null)
 	const [error, setError] = useState(null)
 	const [currency, setCurrency] = useState('USD')
+	const [selectedCropForMap, setSelectedCropForMap] = useState(null)
 
 	const t = translations[language]
 
@@ -64,12 +68,18 @@ const CropAdvisorApp = () => {
 		analyzeCrop(cropName)
 	}
 
+	const handleTechnicalMapCropClick = crop => {
+		setSelectedCropForMap(crop)
+		setView('technicalmap-detail')
+	}
+
 	const handleBackToHome = () => {
 		setView('home')
 		setSelectedCategory(null)
 		setAnalysis(null)
 		setSearchQuery('')
 		setError(null)
+		setSelectedCropForMap(null)
 	}
 
 	return (
@@ -125,6 +135,37 @@ const CropAdvisorApp = () => {
 						currency={currency}
 						language={language}
 						onAnalyzeAlternative={analyzeCrop}
+					/>
+				)}
+
+				{view === 'technicalmap-categories' && !selectedCategory && (
+					<TechnicalMapCategoriesView
+						t={t}
+						categories={categories}
+						language={language}
+						setSelectedCategory={setSelectedCategory}
+					/>
+				)}
+
+				{view === 'technicalmap-categories' && selectedCategory && (
+					<TechnicalMapCropsView
+						t={t}
+						category={categories[selectedCategory]}
+						language={language}
+						onBack={() => setSelectedCategory(null)}
+						onCropClick={handleTechnicalMapCropClick}
+					/>
+				)}
+
+				{view === 'technicalmap-detail' && selectedCropForMap && (
+					<TechnicalMapView
+						t={t}
+						crop={selectedCropForMap}
+						language={language}
+						onBack={() => {
+							setView('technicalmap-categories')
+							setSelectedCropForMap(null)
+						}}
 					/>
 				)}
 			</main>
