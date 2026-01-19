@@ -10,7 +10,7 @@ const Header = ({
 	currency,
 	setCurrency,
 }) => {
-	const logoUrl = '../../assets/logo.png'
+	const logoUrl = '/logo.png'
 
 	return (
 		<header className='bg-green-700 text-white shadow-lg'>
