@@ -8,7 +8,7 @@ const TechnicalMapCategoriesView = ({
 	t,
 	categories,
 	language,
-	setSelectedCategory,
+	onSelectCategory,
 }) => {
 	return (
 		<div className='space-y-8'>
@@ -25,7 +25,7 @@ const TechnicalMapCategoriesView = ({
 				{Object.entries(categories).map(([key, category]) => (
 					<button
 						key={key}
-						onClick={() => setSelectedCategory(key)}
+						onClick={() => onSelectCategory(key)}
 						className='bg-white rounded-xl shadow-lg p-6 md:p-8 hover:shadow-xl transition-all transform hover:scale-105 group'
 					>
 						<div

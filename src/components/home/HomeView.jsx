@@ -1,7 +1,6 @@
-import React from 'react'
-import { Search, Grid, BookOpen } from 'lucide-react'
+import { BookOpen, Grid, Search } from 'lucide-react'
 
-const HomeView = ({ t, setView }) => {
+const HomeView = ({ t, onNavigate }) => {
 	return (
 		<div className='space-y-6 md:space-y-8'>
 			<div className='text-center mb-8 md:mb-12'>
@@ -13,12 +12,12 @@ const HomeView = ({ t, setView }) => {
 				</p>
 			</div>
 
-			<div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8'>
+			<div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-stretch'>
 				<button
-					onClick={() => setView('categories')}
-					className='bg-white rounded-2xl shadow-xl p-8 md:p-10 hover:shadow-2xl transition-all transform hover:scale-105 group'
+					onClick={() => onNavigate('/categories')}
+					className='bg-white rounded-2xl shadow-xl p-8 md:p-10 hover:shadow-2xl transition-all transform hover:scale-105 group h-full flex flex-col min-h-[320px] md:min-h-[380px]'
 				>
-					<div className='text-center'>
+					<div className='text-center flex-1 flex flex-col justify-between'>
 						<div className='text-6xl md:text-7xl mb-4 md:mb-6 group-hover:scale-110 transition-transform'>
 							🌾
 						</div>
@@ -36,10 +35,10 @@ const HomeView = ({ t, setView }) => {
 				</button>
 
 				<button
-					onClick={() => setView('search')}
-					className='bg-white rounded-2xl shadow-xl p-8 md:p-10 hover:shadow-2xl transition-all transform hover:scale-105 group'
+					onClick={() => onNavigate('/search')}
+					className='bg-white rounded-2xl shadow-xl p-8 md:p-10 hover:shadow-2xl transition-all transform hover:scale-105 group h-full flex flex-col min-h-[320px] md:min-h-[380px]'
 				>
-					<div className='text-center'>
+					<div className='text-center flex-1 flex flex-col justify-between'>
 						<div className='text-6xl md:text-7xl mb-4 md:mb-6 group-hover:scale-110 transition-transform'>
 							🔍
 						</div>
@@ -57,10 +56,10 @@ const HomeView = ({ t, setView }) => {
 				</button>
 
 				<button
-					onClick={() => setView('technicalmap-categories')}
-					className='bg-white rounded-2xl shadow-xl p-8 md:p-10 hover:shadow-2xl transition-all transform hover:scale-105 group'
+					onClick={() => onNavigate('/technical-map')}
+					className='bg-white rounded-2xl shadow-xl p-8 md:p-10 hover:shadow-2xl transition-all transform hover:scale-105 group h-full flex flex-col min-h-[320px] md:min-h-[380px]'
 				>
-					<div className='text-center'>
+					<div className='text-center flex-1 flex flex-col justify-between'>
 						<div className='text-6xl md:text-7xl mb-4 md:mb-6 group-hover:scale-110 transition-transform'>
 							📖
 						</div>
