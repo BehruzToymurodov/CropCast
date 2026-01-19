@@ -4,7 +4,7 @@ const getCategoryName = (category, language) => {
 	return category.nameEn
 }
 
-const CategoriesView = ({ t, categories, language, setSelectedCategory }) => {
+const CategoriesView = ({ t, categories, language, onSelectCategory }) => {
 	return (
 		<div className='space-y-8'>
 			<div className='text-center mb-6 md:mb-8 px-4'>
@@ -20,7 +20,7 @@ const CategoriesView = ({ t, categories, language, setSelectedCategory }) => {
 				{Object.entries(categories).map(([key, category]) => (
 					<button
 						key={key}
-						onClick={() => setSelectedCategory(key)}
+						onClick={() => onSelectCategory(key)}
 						className='bg-white rounded-xl shadow-lg p-6 md:p-8 hover:shadow-xl transition-all transform hover:scale-105 group'
 					>
 						<div

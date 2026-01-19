@@ -1,4 +1,4 @@
-import { ArrowLeft, CheckCircle2, Clock } from 'lucide-react'
+import { CheckCircle2, Clock } from 'lucide-react'
 import { getDefaultTechnicalMap, technicalMaps } from '../../data/technicalMaps'
 import StageCard from './StageCard'
 import Timeline from './Timeline'
@@ -9,7 +9,7 @@ const getCropName = (crop, language) => {
 	return crop.nameEn
 }
 
-const TechnicalMapView = ({ t, crop, language, onBack }) => {
+const TechnicalMapView = ({ t, crop, language }) => {
 	const cropName = getCropName(crop, language)
 
 	const technicalMap =
@@ -18,14 +18,6 @@ const TechnicalMapView = ({ t, crop, language, onBack }) => {
 	return (
 		<div className='space-y-6 md:space-y-8'>
 			<div className='bg-white rounded-xl shadow-lg p-6 md:p-8'>
-				<button
-					onClick={onBack}
-					className='flex items-center gap-2 text-green-600 hover:text-green-700 mb-4 text-sm md:text-base'
-				>
-					<ArrowLeft className='w-5 h-5' />
-					{t.backToCategories}
-				</button>
-
 				<div className='flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6'>
 					<div className='text-6xl md:text-8xl'>{crop.emoji}</div>
 					<div className='flex-1 text-center sm:text-left'>
