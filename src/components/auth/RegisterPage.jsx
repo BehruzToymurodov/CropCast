@@ -7,6 +7,8 @@ import {
 	UserPlus,
 } from 'lucide-react'
 import { useState } from 'react'
+import logoMark from '../../assets/LOGO_Itself_1x1.png'
+import mainBg from '../../assets/main_bg.jpg'
 import LanguageSwitcher from '../common/LanguageSwitcher'
 
 const RegisterPage = ({
@@ -26,6 +28,32 @@ const RegisterPage = ({
 	const [showGooglePrompt, setShowGooglePrompt] = useState(false)
 	const [googleEmail, setGoogleEmail] = useState('')
 	const [googleError, setGoogleError] = useState('')
+	const welcomeText = t.welcomeToCropCast
+
+	const renderWelcomeText = text => {
+		const brand = 'Hosildor'
+		const brandStart = text.indexOf(brand)
+		const brandEnd = brandStart === -1 ? -1 : brandStart + brand.length
+
+		return (
+			<span className='welcome-text text-white' role='text' aria-label={text}>
+				{text.split('').map((char, index) => {
+					const isBrand =
+						brandStart !== -1 && index >= brandStart && index < brandEnd
+					return (
+						<span
+							key={`${char}-${index}`}
+							className={`welcome-letter${isBrand ? ' font-semibold text-[#6FD801]' : ''}`}
+							style={{ animationDelay: `${0.8 + index * 0.04}s` }}
+							aria-hidden='true'
+						>
+							{char === ' ' ? '\u00A0' : char}
+						</span>
+					)
+				})}
+			</span>
+		)
+	}
 
 	const handleSubmit = async e => {
 		e.preventDefault()
@@ -129,20 +157,22 @@ const RegisterPage = ({
 	}
 
 	return (
-		<div className='auth-page min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center px-4 py-10 relative overflow-hidden'>
-			<div className='absolute -top-24 -right-20 w-64 h-64 bg-emerald-200 rounded-full blur-3xl opacity-60'></div>
-			<div className='absolute -bottom-28 -left-16 w-72 h-72 bg-green-200 rounded-full blur-3xl opacity-60'></div>
+		<div
+			className='auth-page min-h-screen bg-cover bg-center flex items-center justify-center px-4 py-10 relative overflow-hidden'
+			style={{ backgroundImage: `url(${mainBg})` }}
+		>
+			<div className='absolute inset-0 bg-black/20'></div>
 
-			<div className='relative w-full max-w-5xl grid lg:grid-cols-[0.9fr_1.1fr] gap-6'>
-				<div className='auth-card bg-white/90 backdrop-blur rounded-3xl shadow-2xl p-6 md:p-8 order-2 lg:order-1'>
+			<div className='relative w-full max-w-6xl grid lg:grid-cols-2 gap-6'>
+				<div className='auth-card bg-emerald-800/40 backdrop-blur-[20px] text-white rounded-3xl shadow-2xl p-6 md:p-8 order-2 lg:order-1 border border-emerald-200/20'>
 					<div className='flex items-center justify-end mb-4'>
 						<LanguageSwitcher language={language} setLanguage={setLanguage} />
 					</div>
 					<div className='text-center mb-6'>
-						<h2 className='font-hero text-2xl md:text-3xl text-gray-900'>
+						<h2 className='font-hero text-2xl md:text-3xl text-white'>
 							{t.register}
 						</h2>
-						<p className='text-gray-500 mt-2 text-sm md:text-base'>
+						<p className='text-emerald-100 mt-2 text-sm md:text-base'>
 							{t.createAccount}
 						</p>
 					</div>
@@ -167,7 +197,7 @@ const RegisterPage = ({
 							setGoogleEmail('')
 							setGoogleError('')
 						}}
-						className='w-full bg-white hover:bg-gray-50 border-2 border-gray-200 text-gray-700 py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2 mb-5'
+						className='w-full bg-white hover:bg-gray-100 border-2 border-white/80 text-gray-800 py-3 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2 mb-5'
 					>
 						<svg className='w-5 h-5' viewBox='0 0 24 24'>
 							<path
@@ -192,7 +222,7 @@ const RegisterPage = ({
 
 					<div className='my-6 flex items-center gap-4'>
 						<div className='flex-1 h-px bg-gray-200'></div>
-						<span className='text-gray-400 text-xs uppercase tracking-widest'>
+						<span className='text-emerald-100 text-xs uppercase tracking-widest'>
 							{t.or}
 						</span>
 						<div className='flex-1 h-px bg-gray-200'></div>
@@ -200,7 +230,7 @@ const RegisterPage = ({
 
 					<form onSubmit={handleSubmit} className='space-y-4'>
 						<div className='flex flex-col sm:flex-row sm:items-center gap-3'>
-							<label className='block text-sm font-semibold text-gray-700 sm:w-32 sm:text-right'>
+							<label className='block text-sm font-semibold text-emerald-100 sm:w-32 sm:text-right'>
 								{t.username}
 							</label>
 							<div className='relative flex-1'>
@@ -210,13 +240,13 @@ const RegisterPage = ({
 									value={username}
 									onChange={e => setUsername(e.target.value)}
 									placeholder={t.enterUsername}
-									className='w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none bg-white'
+									className='w-full pl-10 pr-4 py-3 border-2 border-white/80 rounded-xl focus:border-white focus:outline-none bg-white text-gray-900'
 								/>
 							</div>
 						</div>
 
 						<div className='flex flex-col sm:flex-row sm:items-center gap-3'>
-							<label className='block text-sm font-semibold text-gray-700 sm:w-32 sm:text-right'>
+							<label className='block text-sm font-semibold text-emerald-100 sm:w-32 sm:text-right'>
 								{t.password}
 							</label>
 							<div className='relative flex-1'>
@@ -226,13 +256,13 @@ const RegisterPage = ({
 									value={password}
 									onChange={e => setPassword(e.target.value)}
 									placeholder={t.enterPassword}
-									className='w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none bg-white'
+									className='w-full pl-10 pr-4 py-3 border-2 border-white/80 rounded-xl focus:border-white focus:outline-none bg-white text-gray-900'
 								/>
 							</div>
 						</div>
 
 						<div className='flex flex-col sm:flex-row sm:items-center gap-3'>
-							<label className='block text-sm font-semibold text-gray-700 sm:w-32 sm:text-right'>
+							<label className='block text-sm font-semibold text-emerald-100 sm:w-32 sm:text-right'>
 								{t.confirmPassword}
 							</label>
 							<div className='relative flex-1'>
@@ -242,7 +272,7 @@ const RegisterPage = ({
 									value={confirmPassword}
 									onChange={e => setConfirmPassword(e.target.value)}
 									placeholder={t.confirmPasswordPlaceholder}
-									className='w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none bg-white'
+									className='w-full pl-10 pr-4 py-3 border-2 border-white/80 rounded-xl focus:border-white focus:outline-none bg-white text-gray-900'
 								/>
 							</div>
 						</div>
@@ -250,19 +280,19 @@ const RegisterPage = ({
 						<button
 							type='submit'
 							disabled={loading}
-							className='w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold transition-colors disabled:bg-gray-400 flex items-center justify-center gap-2'
-						>
+						className='w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold transition-colors disabled:bg-green-400 flex items-center justify-center gap-2'
+					>
 							<UserPlus className='w-5 h-5' />
 							{loading ? t.registering : t.register}
 						</button>
 					</form>
 
 					<div className='text-center mt-6'>
-						<p className='text-gray-600 text-sm'>
+						<p className='text-emerald-100 text-sm'>
 							{t.alreadyHaveAccount}{' '}
 							<button
 								onClick={onSwitchToLogin}
-								className='text-green-600 hover:text-green-700 font-semibold'
+								className='text-white hover:text-white/80 font-semibold'
 							>
 								{t.loginNow}
 							</button>
@@ -270,17 +300,30 @@ const RegisterPage = ({
 					</div>
 				</div>
 
-				<div className='auth-card bg-gradient-to-br from-emerald-700 via-green-700 to-teal-700 rounded-3xl p-8 md:p-10 text-white shadow-2xl flex flex-col justify-between order-1 lg:order-2'>
+				<div className='auth-card bg-white/20 backdrop-blur-[20px] rounded-3xl p-8 md:p-10 text-white shadow-2xl flex flex-col justify-between order-1 lg:order-2 border border-white/30'>
 					<div>
-						<div className='text-5xl md:text-6xl animate-float'>🌿</div>
-						<h1 className='font-hero text-3xl md:text-4xl mt-6 animate-fade-up'>
-							<span className='animate-glow'>{t.welcomeToCropCast}</span>
-						</h1>
-						<p className='mt-4 text-base md:text-lg text-emerald-100'>
+						<div className='flex items-center gap-3'>
+							<img
+								src={logoMark}
+								alt='Hosildor logo'
+								className='auth-logo w-24 h-24 object-contain relative z-10'
+								style={{ animationDelay: '0s' }}
+							/>
+							<h1 className='font-hero text-xl md:text-3xl whitespace-nowrap relative z-0 -ml-2'>
+								{renderWelcomeText(welcomeText)}
+							</h1>
+						</div>
+						<p
+							className='mt-4 text-base md:text-lg text-white/90 animate-fade-up'
+							style={{ animationDelay: '1.2s' }}
+						>
 							{t.welcomeToCropCastDesc}
 						</p>
 					</div>
-					<div className='mt-10 space-y-3 text-sm md:text-base text-emerald-100'>
+					<div
+						className='mt-10 space-y-3 text-sm md:text-base text-white/90 animate-fade-up'
+						style={{ animationDelay: '1.5s' }}
+					>
 						<p>• {t.searchDirect}</p>
 						<p>• {t.browseCategories}</p>
 						<p>• {t.technicalMap}</p>
@@ -323,8 +366,8 @@ const RegisterPage = ({
 							</button>
 							<button
 								onClick={handleGoogleContinue}
-								className='px-5 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700'
-							>
+							className='px-5 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800'
+						>
 								{t.googleContinue}
 							</button>
 						</div>

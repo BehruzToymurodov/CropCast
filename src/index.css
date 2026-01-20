@@ -29,6 +29,23 @@ body {
 	animation: authCard 0.6s ease both;
 }
 
+.auth-logo {
+	opacity: 0;
+	transform: translateY(8px) scale(0.98);
+	animation: logoReveal 0.7s ease forwards;
+}
+
+.welcome-text {
+	display: inline-block;
+}
+
+.welcome-letter {
+	display: inline-block;
+	opacity: 0;
+	transform: translateY(8px);
+	animation: letterReveal 0.6s ease forwards;
+}
+
 @keyframes fadeUp {
 	from {
 		opacity: 0;
@@ -82,12 +99,36 @@ body {
 	}
 }
 
+@keyframes logoReveal {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes letterReveal {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.animate-fade-up,
 	.animate-glow,
 	.animate-float,
 	.auth-page,
-	.auth-card {
+	.auth-card,
+	.auth-logo,
+	.welcome-letter {
 		animation: none;
 	}
 }

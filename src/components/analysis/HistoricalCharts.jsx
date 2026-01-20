@@ -74,14 +74,14 @@ const HistoricalCharts = ({ data, t, currency }) => {
 							yAxisId='left'
 							dataKey='production'
 							fill='#16a34a'
-							name={`${t.production} (tonna)`}
+							name={t.production}
 							radius={[8, 8, 0, 0]}
 						/>
 						<Bar
 							yAxisId='right'
 							dataKey='waste'
 							fill='#dc2626'
-							name={`${t.waste} (%)`}
+							name={t.waste}
 							radius={[8, 8, 0, 0]}
 						/>
 					</ComposedChart>

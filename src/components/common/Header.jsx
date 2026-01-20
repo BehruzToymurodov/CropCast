@@ -1,5 +1,6 @@
 import { ArrowLeft, DollarSign, User } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import logoUrl from '../../assets/LOGO_Itself_1x1.png'
 import LanguageSwitcher from './LanguageSwitcher'
 
 const Header = ({
@@ -13,8 +14,6 @@ const Header = ({
 	currentUser,
 	profilePath = '/profile',
 }) => {
-	const logoUrl = './logo.png'
-
 	return (
 		<header className='bg-green-700 text-white shadow-lg'>
 			<div className='w-full px-4 py-4 md:py-6'>
@@ -22,11 +21,13 @@ const Header = ({
 					{/* Logo and Title */}
 					<div className='flex items-center justify-between'>
 						<div className='flex items-center gap-3'>
-							<img
-								src={logoUrl}
-								alt='CropCast Logo'
-								className='w-10 h-10 md:w-12 md:h-12 object-contain'
-							/>
+							<div className='bg-white rounded-full p-2 shadow-sm'>
+								<img
+									src={logoUrl}
+									alt='Hosildor Logo'
+									className='w-16 h-16 object-contain'
+								/>
+							</div>
 							<div>
 								<h1 className='text-xl md:text-3xl font-bold'>{t.title}</h1>
 								<p className='text-green-100 text-xs md:text-sm'>
